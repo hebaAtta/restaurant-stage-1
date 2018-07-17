@@ -122,7 +122,7 @@ nav h1 a {
   width: 100%;
 }
 
-@media (min-width:700px)  {
+@media (min-width:700px)  { 
   #maincontent-top > #map-container, #maincontent-top > #map-container > #map {
     height: 660px;
   }
@@ -163,7 +163,7 @@ nav h1 a {
   align-items: center;
 }
 
-@media (min-width:481px)  {
+@media (min-width:481px)  { 
   .filter-options {
     flex-direction: row;
   }
@@ -321,7 +321,7 @@ nav h1 a {
   flex-direction: column;
 }
 
-@media (min-width:700px)  {
+@media (min-width:700px)  { 
   #maincontent-top {
     flex-direction: row-reverse;
   }

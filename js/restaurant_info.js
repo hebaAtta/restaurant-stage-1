@@ -16,6 +16,9 @@ window.initMap = () => {
       });
       fillBreadcrumb();
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
+      google.maps.event.addDomListener(window, 'resize', function () {
+        map.setCenter(restaurant.latlng);
+      });
     }
   });
 }
@@ -58,6 +61,7 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   const image = document.getElementById('restaurant-img');
   image.className = 'restaurant-img'
   image.src = DBHelper.imageUrlForRestaurant(restaurant);
+  image.alt = restaurant.name + ' Profile Image';
 
   const cuisine = document.getElementById('restaurant-cuisine');
   cuisine.innerHTML = restaurant.cuisine_type;
@@ -96,7 +100,6 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 fillReviewsHTML = (reviews = self.restaurant.reviews) => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h2');
-  title.setAttribute('tabindex' , "0") ;
   title.innerHTML = 'Reviews';
   container.appendChild(title);
 
@@ -118,7 +121,6 @@ fillReviewsHTML = (reviews = self.restaurant.reviews) => {
  */
 createReviewHTML = (review) => {
   const li = document.createElement('li');
-  li.setAttribute('tabindex' , "0") ;
   const name = document.createElement('p');
   name.innerHTML = review.name;
   li.appendChild(name);
@@ -141,27 +143,12 @@ createReviewHTML = (review) => {
 /**
  * Add restaurant name to the breadcrumb navigation menu
  */
-fillBreadcrumb = (restaurant=self.restaurant) => {
+fillBreadcrumb = (restaurant = self.restaurant) => {
   const breadcrumb = document.getElementById('breadcrumb');
   const li = document.createElement('li');
-  `<a href="">`+restaurant.name+`</a>`;
- // li.innerHTML = restaurant.name;
-  li.innerHTML = `<a href="">`+restaurant.name+`</a>`;
+  li.innerHTML = restaurant.name;
   breadcrumb.appendChild(li);
 }
-
-// fillBreadcrumb = (restaurant = self.restaurant) => {
-//   const breadcrumb = document.getElementById("breadcrumb");
-//   const li = document.createElement("li");
-//   const currentPage = document.createElement("a");
-//   currentPage.href = "#";
-//   currentPage.title = `${restaurant.name} restaurant details`;
-//   currentPage.setAttribute("aria-current", "page");
-//   currentPage.innerHTML = restaurant.name;
-//   li.appendChild(currentPage);
-//   breadcrumb.appendChild(addHomeLink());
-//   breadcrumb.appendChild(li);
-// };
 
 /**
  * Get a parameter by name from page URL.
